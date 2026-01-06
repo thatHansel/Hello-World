@@ -14,13 +14,11 @@
             align-items: center;
             padding: 20px;
         }
-        h1 {
-            color: #ffd700;
-        }
+        h1 { color: #ffd700; }
         .map-container {
             position: relative;
-            width: 480px;
-            height: 600px;
+            width: 520px;
+            height: 680px;
             background: #7cb342;
             border: 4px solid #5d4037;
             border-radius: 8px;
@@ -28,72 +26,66 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(12, 40px);
-            grid-template-rows: repeat(15, 40px);
+            grid-template-columns: repeat(13, 40px);
+            grid-template-rows: repeat(17, 40px);
             width: 100%;
             height: 100%;
         }
         .cell {
             border: 1px solid rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
+            box-sizing: border-box;
         }
-        .path {
-            background: #d4a574;
-        }
-        .water {
-            background: #4fc3f7;
-        }
-        .tree {
-            background: #558b2f;
-        }
+        .path { background: #d4a574; }
+        .water { background: #4fc3f7; }
+        .grass { background: #7cb342; }
+        .tree { background: #558b2f; border-radius: 50%; margin: 3px; }
+        
         .tower-spot {
             position: relative;
-            animation: pulse 1.5s infinite;
+            z-index: 5;
         }
         .tower-spot::after {
             content: attr(data-priority);
             position: absolute;
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 0, 0, 0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 0, 0, 0.9);
             border: 3px solid #ffeb3b;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             color: white;
             z-index: 10;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); }
         }
         .legend {
             margin-top: 20px;
             padding: 15px;
             background: #2d2d44;
             border-radius: 8px;
-            max-width: 480px;
+            max-width: 520px;
         }
-        .legend h3 {
-            color: #ffd700;
-            margin-top: 0;
-        }
+        .legend h3 { color: #ffd700; margin-top: 0; }
         .legend-item {
             display: flex;
             align-items: center;
             margin: 8px 0;
         }
         .legend-marker {
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 0, 0, 0.8);
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 0, 0, 0.9);
             border: 3px solid #ffeb3b;
             border-radius: 50%;
             display: flex;
@@ -101,148 +93,152 @@
             justify-content: center;
             font-weight: bold;
             margin-right: 10px;
+            flex-shrink: 0;
         }
-        .priority-1 { background: #ff1744; }
-        .priority-2 { background: #ff5722; }
-        .priority-3 { background: #ff9800; }
-        .priority-4 { background: #ffc107; color: #333; }
     </style>
 </head>
 <body>
     <h1>🏰 Tower Placement Guide</h1>
-    <p>Red circles = Recommended tower positions (numbered by priority)</p>
+    <p>Based on your actual game map - Red circles show optimal placements</p>
     
     <div class="map-container">
         <div class="grid">
-            <!-- Row 0 -->
-            <div class="cell tree"></div>
+            <!-- Row 0: Entry path at top with water -->
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell water"></div>
             <div class="cell water"></div>
             <div class="cell water"></div>
+            <div class="cell water"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 1 -->
             <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 2 -->
             <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell tree tower-spot" data-priority="1"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
             <div class="cell tree"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
             
-            <!-- Row 3 -->
+            <!-- Row 3: Horizontal path section -->
             <div class="cell tree"></div>
+            <div class="cell grass tower-spot" data-priority="1"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 4 -->
             <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
             <div class="cell water"></div>
             <div class="cell water"></div>
             <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree tower-spot" data-priority="2"></div>
-            <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 5 -->
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
+            <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell grass tower-spot" data-priority="2"></div>
+            <div class="cell path"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 6 -->
-            <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
+            <div class="cell path"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 7 -->
-            <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell tree tower-spot" data-priority="3"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
-            <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 8 -->
-            <div class="cell tree"></div>
             <div class="cell path"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass tower-spot" data-priority="3"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 9 -->
-            <div class="cell tree"></div>
-            <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
             <div class="cell path"></div>
@@ -250,9 +246,12 @@
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell tree tower-spot" data-priority="4"></div>
-            <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 10 -->
             <div class="cell tree"></div>
@@ -263,10 +262,11 @@
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell water"></div>
-            <div class="cell water"></div>
-            <div class="cell path"></div>
+            <div class="cell grass tower-spot" data-priority="4"></div>
             <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
             <!-- Row 11 -->
             <div class="cell tree"></div>
@@ -276,13 +276,29 @@
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
+            <div class="cell water"></div>
+            <div class="cell water"></div>
+            <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            
+            <!-- Row 12 -->
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
+            <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell water"></div>
             <div class="cell water"></div>
-            <div class="cell path"></div>
             <div class="cell tree"></div>
+            <div class="cell path"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
-            <!-- Row 12-14 (bottom area) -->
+            <!-- Row 13 -->
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
@@ -290,12 +306,14 @@
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
+            <div class="cell water"></div>
+            <div class="cell water"></div>
             <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
+            <!-- Row 14 -->
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell tree"></div>
@@ -307,46 +325,68 @@
             <div class="cell tree"></div>
             <div class="cell tree"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
-            <div class="cell tree"></div>
+            <!-- Row 15 -->
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
             <div class="cell path"></div>
-            <div class="cell tree"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            
+            <!-- Row 16 (exit to castle) -->
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell grass"></div>
+            <div class="cell path"></div>
+            <div class="cell path"></div>
+            <div class="cell grass">🏰</div>
         </div>
     </div>
     
     <div class="legend">
-        <h3>📍 Placement Priority</h3>
+        <h3>📍 Recommended Tower Placements</h3>
         <div class="legend-item">
-            <div class="legend-marker priority-1">1</div>
-            <span><strong>First Corner (Top-Left)</strong> - Hits enemies early, covers first turn</span>
+            <div class="legend-marker">1</div>
+            <span><strong>Upper-left bend</strong> - Covers the long horizontal section where enemies turn</span>
         </div>
         <div class="legend-item">
-            <div class="legend-marker priority-2">2</div>
-            <span><strong>Middle Choke Point</strong> - Covers long path section</span>
+            <div class="legend-marker">2</div>
+            <span><strong>Center junction</strong> - Hits enemies on the middle curves near water</span>
         </div>
         <div class="legend-item">
-            <div class="legend-marker priority-3">3</div>
-            <span><strong>S-Curve Area</strong> - Hits enemies on multiple passes</span>
+            <div class="legend-marker">3</div>
+            <span><strong>Lower S-curve</strong> - Covers multiple path passes as enemies wind through</span>
         </div>
         <div class="legend-item">
-            <div class="legend-marker priority-4">4</div>
-            <span><strong>Final Defense</strong> - Last chance before castle</span>
+            <div class="legend-marker">4</div>
+            <span><strong>Pre-exit defense</strong> - Last chance before enemies reach the castle</span>
         </div>
         
-        <h3 style="margin-top: 20px;">💰 With 500 Gold:</h3>
-        <p>Buy <strong>Sword Towers (100g)</strong> for positions 1 & 3<br>
-        Buy <strong>Fire Towers (150g)</strong> for positions 2 & 4<br>
-        <em>Total: 500g - perfect budget usage!</em></p>
+        <h3 style="margin-top: 20px;">💰 Budget Allocation (500g):</h3>
+        <ul style="margin: 0; padding-left: 20px;">
+            <li><strong>Position 1:</strong> Fire Tower (150g) - high early damage</li>
+            <li><strong>Position 2:</strong> Sword Tower (100g) - budget option</li>
+            <li><strong>Position 3:</strong> Fire Tower (150g) - covers S-curve</li>
+            <li><strong>Position 4:</strong> Sword Tower (100g) - final defense</li>
+        </ul>
+        <p style="margin-top: 10px;"><em>Total: 500g ✓</em></p>
     </div>
 </body>
 </html>
