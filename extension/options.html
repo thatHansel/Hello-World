@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linked File Downloader — Options</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        max-width: 900px;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 12px 0;
+      }
+      .card {
+        border: 1px solid rgba(127, 127, 127, 0.35);
+        border-radius: 12px;
+        padding: 14px;
+        margin: 12px 0;
+      }
+      label {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin: 10px 0;
+      }
+      input[type="checkbox"] {
+        margin-top: 2px;
+      }
+      textarea,
+      input[type="number"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(127, 127, 127, 0.45);
+        background: transparent;
+      }
+      textarea {
+        min-height: 90px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+      }
+      .muted {
+        opacity: 0.8;
+        font-size: 12px;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .row > div {
+        flex: 1 1 220px;
+      }
+      button {
+        appearance: none;
+        border: 1px solid rgba(127, 127, 127, 0.45);
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      #status {
+        margin-left: 10px;
+        font-size: 12px;
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Linked File Downloader — Options</h1>
+
+    <div class="card">
+      <label>
+        <input id="sameHostOnly" type="checkbox" />
+        <div>
+          <div><strong>Same host only</strong></div>
+          <div class="muted">
+            If enabled, only crawl/download links whose hostname matches the
+            starting page.
+          </div>
+        </div>
+      </label>
+
+      <label>
+        <input id="sniffHtmlByFetch" type="checkbox" />
+        <div>
+          <div><strong>Verify linked pages by fetch</strong></div>
+          <div class="muted">
+            If enabled, the extension fetches linked pages and only parses them
+            if the response looks like <code>text/html</code>. Some sites may
+            block this (auth/CORS).
+          </div>
+        </div>
+      </label>
+
+      <div class="row">
+        <div>
+          <label>
+            <div style="width: 100%">
+              <div><strong>Max linked pages (depth 1)</strong></div>
+              <div class="muted">Safety limit for crawling.</div>
+              <input id="maxLinkedPages" type="number" min="1" max="500" />
+            </div>
+          </label>
+        </div>
+        <div>
+          <label>
+            <div style="width: 100%">
+              <div><strong>Max total downloads</strong></div>
+              <div class="muted">Safety limit per run.</div>
+              <input id="maxDownloads" type="number" min="1" max="5000" />
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div><strong>File extensions to download</strong></div>
+      <div class="muted">
+        Comma-separated, case-insensitive. Example:
+        <code>pdf,zip,jpg,png</code>
+      </div>
+      <textarea id="fileExtensionsCsv" spellcheck="false"></textarea>
+    </div>
+
+    <div>
+      <button id="save">Save</button><span id="status"></span>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
+
